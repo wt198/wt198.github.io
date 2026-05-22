@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog'))
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+  .slice(0, 6);
+---
+
+<BaseLayout title="首页">
+  <section class="section">
+    <h2 class="section-title">最新文章</h2>
+    <ul class="post-list">
+      {posts.map((post) => (
+        <li class="post-item">
+          <div>
+            {post.data.tags?.map((tag) => (
+              <span class="tag">{tag}</span>
+            ))}
+            <a href={`/blog/${post.slug}`}>{post.data.title}</a>
+          </div>
+          <span class="date">{post.data.date}</span>
+        </li>
+      ))}
+    </ul>
+    <div style="margin-top: 20px;">
+      <a href="/blog">查看所有文章 →</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">项目</h2>
+    <div class="project-grid">
+      <div class="project-card">
+        <h3>个人网站</h3>
+        <p>用 Astro 搭建的个人博客，记录技术与生活</p>
+      </div>
+      <div class="project-card">
+        <h3>EMG 信号处理</h3>
+        <p>肌电信号采集与分析相关项目</p>
+      </div>
+      <div class="project-card">
+        <h3>ZYNQ 开发</h3>
+        <p>FPGA + ARM 嵌入式开发项目</p>
+      </div>
+    </div>
+    <div style="margin-top: 20px;">
+      <a href="/projects">查看所有项目 →</a>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const projects = [
+  {
+    title: '个人网站',
+    description: '用 Astro 搭建的个人博客站点，记录技术与生活，部署在 GitHub Pages',
+    tags: ['Astro', 'Web'],
+  },
+  {
+    title: 'EMG 信号处理',
+    description: '肌电信号采集与分析项目，探索神经形态计算与机器人控制',
+    tags: ['信号处理', '神经形态'],
+  },
+  {
+    title: 'ZYNQ 嵌入式开发',
+    description: '基于 Xilinx ZYNQ 平台的 FPGA + ARM 协同开发项目',
+    tags: ['FPGA', '嵌入式'],
+  },
+  {
+    title: '电子鼻/电子舌',
+    description: '气体传感器阵列信号采集与模式识别系统',
+    tags: ['传感器', '机器学习'],
+  },
+  {
+    title: 'BLE 蓝牙项目',
+    description: '低功耗蓝牙相关开发，包括固件和上位机',
+    tags: ['BLE', '物联网'],
+  },
+];
+---
+
+<BaseLayout title="项目">
+  <section class="section">
+    <h1>个人项目</h1>
+    <p style="color: var(--color-text-secondary); margin: 8px 0 32px;">
+      记录学习和实践中的项目
+    </p>
+    <div class="project-grid">
+      {projects.map((project) => (
+        <div class="project-card">
+          <h3>{project.title}</h3>
+          <p>{project.description}</p>
+          <div style="margin-top: 12px; display: flex; gap: 6px; flex-wrap: wrap;">
+            {project.tags.map((tag) => (
+              <span class="tag">{tag}</span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
