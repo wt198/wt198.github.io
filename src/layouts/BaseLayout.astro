@@ -14,6 +14,7 @@ const { title, description = '记录生活，分享技术' } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css" />
     <title>{title}</title>
   </head>
   <body>
@@ -29,10 +30,10 @@ const { title, description = '记录生活，分享技术' } = Astro.props;
           <a href="/about">关于</a>
         </nav>
         <div class="sidebar-socials">
-          <a href="https://github.com/wt198" target="_blank">GitHub</a>
-          <a href="mailto:albbnwt@gmail.com">Email</a>
-          <a href="https://www.zhihu.com/people/" target="_blank">知乎</a>
-          <a href="https://space.bilibili.com/" target="_blank">Bilibili</a>
+          <a class="social-github" href="https://github.com/wt198" target="_blank">GitHub</a>
+          <a class="social-email" href="mailto:albbnwt@gmail.com">Email</a>
+          <a class="social-zhihu" href="https://www.zhihu.com/people/" target="_blank">知乎</a>
+          <a class="social-bilibili" href="https://space.bilibili.com/" target="_blank">Bilibili</a>
         </div>
       </div>
     </aside>
