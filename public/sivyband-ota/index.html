@@ -3,6 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <meta name="color-scheme" content="dark">
   <title>SivyBand Gen2 OTA Console</title>
   <link rel="stylesheet" href="./styles.css">
@@ -15,43 +18,116 @@
         <h1>OTA 控制台</h1>
         <p class="subtitle">nRF54L15 · MCUboot · MCUmgr SMP over BLE</p>
       </div>
-      <div class="header-status"><span id="connectionDot" class="status-dot"></span><span id="connectionText">未连接</span></div>
+      <div class="header-status">
+        <span id="connectionDot" class="status-dot"></span>
+        <span id="connectionText">未连接</span>
+      </div>
     </header>
+
     <section class="runtime-grid" aria-label="运行环境">
       <div class="runtime-item"><span>页面来源</span><strong id="runtimeOrigin">--</strong></div>
       <div class="runtime-item"><span>安全上下文</span><strong id="runtimeSecurity">--</strong></div>
       <div class="runtime-item"><span>Web Bluetooth</span><strong id="runtimeBluetooth">--</strong></div>
       <div class="runtime-item"><span>OTA 服务</span><strong id="runtimeOta">--</strong></div>
     </section>
+
     <section class="hero-grid">
       <section class="panel device-panel">
-        <div class="panel-heading"><div><p class="kicker">01 / DEVICE</p><h2>连接设备</h2></div><span id="deviceBadge" class="badge neutral">未连接</span></div>
+        <div class="panel-heading">
+          <div>
+            <p class="kicker">01 / DEVICE</p>
+            <h2>连接设备</h2>
+          </div>
+          <span id="deviceBadge" class="badge neutral">未连接</span>
+        </div>
         <p class="panel-copy">通过浏览器原生选择器连接正在广播 SMP OTA 服务的 SivyBand。连接过程必须由用户点击触发。</p>
-        <div class="device-card"><div class="device-icon">SB</div><div><strong id="deviceName">未选择设备</strong><span id="deviceAddress">等待连接</span></div></div>
-        <div class="button-row"><button id="connectBtn" class="primary">连接设备</button><button id="disconnectBtn" disabled>断开</button></div>
+        <div class="device-card">
+          <div class="device-icon">SB</div>
+          <div>
+            <strong id="deviceName">未选择设备</strong>
+            <span id="deviceAddress">等待连接</span>
+          </div>
+        </div>
+        <div class="button-row">
+          <button id="connectBtn" class="primary">连接设备</button>
+          <button id="disconnectBtn" disabled>断开</button>
+        </div>
         <div id="browserHint" class="hint"></div>
       </section>
+
       <section class="panel image-panel">
-        <div class="panel-heading"><div><p class="kicker">02 / IMAGE</p><h2>选择镜像</h2></div><span class="badge accent">SIGNED</span></div>
-        <label class="file-drop" for="otaFile"><span class="file-icon">↑</span><span><strong>选择 OTA 文件</strong><small>推荐 dfu_application.zip，也支持 zephyr.signed.bin</small></span></label>
+        <div class="panel-heading">
+          <div>
+            <p class="kicker">02 / IMAGE</p>
+            <h2>选择镜像</h2>
+          </div>
+          <span class="badge accent">SIGNED</span>
+        </div>
+        <label class="file-drop" for="otaFile">
+          <span class="file-icon">↑</span>
+          <span><strong>选择 OTA 文件</strong><small>推荐 dfu_application.zip，也支持 zephyr.signed.bin</small></span>
+        </label>
         <input id="otaFile" type="file" accept=".zip,.bin">
-        <div class="file-details"><div><span>文件</span><strong id="otaFileName">未选择</strong></div><div><span>大小</span><strong id="otaFileSize">--</strong></div><div><span>版本</span><strong id="otaVersion">--</strong></div><div><span>SHA-256</span><strong id="otaHash">--</strong></div></div>
+        <div class="file-details">
+          <div><span>文件</span><strong id="otaFileName">未选择</strong></div>
+          <div><span>大小</span><strong id="otaFileSize">--</strong></div>
+          <div><span>版本</span><strong id="otaVersion">--</strong></div>
+          <div><span>SHA-256</span><strong id="otaHash">--</strong></div>
+        </div>
         <div id="imageHint" class="hint">请选择由 OTA 构建脚本生成的签名镜像。</div>
       </section>
     </section>
+
     <section class="panel progress-panel">
-      <div class="panel-heading compact"><div><p class="kicker">03 / TRANSFER</p><h2>上传与测试启动</h2></div><span id="transferState" class="transfer-state">就绪</span></div>
+      <div class="panel-heading compact">
+        <div>
+          <p class="kicker">03 / TRANSFER</p>
+          <h2>上传与测试启动</h2>
+        </div>
+        <span id="transferState" class="transfer-state">就绪</span>
+      </div>
       <div class="progress-track"><div id="otaProgressBar" class="progress-bar"></div></div>
       <div class="progress-meta"><span id="otaProgressText">等待选择镜像</span><span id="otaPercent">0%</span></div>
-      <div class="button-row transfer-actions"><button id="otaUploadBtn" class="primary" disabled>上传并测试</button><button id="imageStateBtn" disabled>读取镜像状态</button><button id="resetBtn" disabled>重启设备</button></div>
-      <div class="warning-box"><strong>操作确认</strong><span>上传完成后只会标记 test boot，不会立即切换运行镜像。确认目标槽位和哈希无误后，再手动执行重启。</span></div>
+      <div class="button-row transfer-actions">
+        <button id="otaUploadBtn" class="primary" disabled>上传并测试</button>
+        <button id="imageStateBtn" disabled>读取镜像状态</button>
+        <button id="resetBtn" disabled>重启设备</button>
+      </div>
+      <div class="warning-box">
+        <strong>操作确认</strong>
+        <span>上传完成后只会标记 test boot，不会立即切换运行镜像。确认目标槽位和哈希无误后，再手动执行重启。</span>
+      </div>
     </section>
+
     <section class="lower-grid">
-      <section class="panel state-panel"><div class="panel-heading compact"><div><p class="kicker">04 / BOOT SLOTS</p><h2>镜像状态</h2></div><span id="stateSummary" class="badge neutral">尚未读取</span></div><div id="imageList" class="image-list"><div class="empty-state">连接设备后读取 MCUboot 槽位状态。</div></div></section>
-      <section class="panel log-panel"><div class="panel-heading compact"><div><p class="kicker">05 / EVENT LOG</p><h2>事件日志</h2></div><button id="clearLogBtn" class="text-button">清空</button></div><pre id="logView" class="log-view"></pre></section>
+      <section class="panel state-panel">
+        <div class="panel-heading compact">
+          <div>
+            <p class="kicker">04 / BOOT SLOTS</p>
+            <h2>镜像状态</h2>
+          </div>
+          <span id="stateSummary" class="badge neutral">尚未读取</span>
+        </div>
+        <div id="imageList" class="image-list"><div class="empty-state">连接设备后读取 MCUboot 槽位状态。</div></div>
+      </section>
+
+      <section class="panel log-panel">
+        <div class="panel-heading compact">
+          <div>
+            <p class="kicker">05 / EVENT LOG</p>
+            <h2>事件日志</h2>
+          </div>
+          <button id="clearLogBtn" class="text-button">清空</button>
+        </div>
+        <pre id="logView" class="log-view"></pre>
+      </section>
     </section>
-    <footer><span>OTA Web Console · SivyBand Gen2</span><span>仅用于授权设备和开发验证</span></footer>
+
+    <footer>
+      <span>OTA Web Console · SivyBand Gen2</span>
+      <span>仅用于授权设备和开发验证</span>
+    </footer>
   </main>
-  <script src="./app.js"></script>
+<script src="./app.js?v=20260820-cbor5-resume2"></script>
 </body>
 </html>
