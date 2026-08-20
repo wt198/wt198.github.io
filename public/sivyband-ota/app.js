@@ -56,10 +56,10 @@ function normalizeBytes(value) {
   return null;
 }
 
-const APP_BUILD = '20260820-cbor5-resume2';
+const APP_BUILD = '20260820-cbor5-resume3';
 const UPLOAD_CHUNK_SIZE = 128;
-const UPLOAD_RETRY_LIMIT = 4;
-const RECONNECT_RETRY_LIMIT = 3;
+const UPLOAD_RETRY_LIMIT = 6;
+const RECONNECT_RETRY_LIMIT = 5;
 
 function concatBytes(...values) {
   const chunks = values.map((value) => normalizeBytes(value) || new Uint8Array());
